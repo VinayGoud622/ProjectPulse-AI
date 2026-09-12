@@ -1,0 +1,1765 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>ProjectPulse AI</title>
+
+
+    <style>
+
+        * {
+
+            box-sizing: border-box;
+
+            margin: 0;
+
+            padding: 0;
+
+        }
+
+
+        body {
+
+            font-family: Arial, sans-serif;
+
+            background: #f4f7fb;
+
+            color: #1f2937;
+
+        }
+
+
+        .container {
+
+            width: 90%;
+
+            max-width: 1100px;
+
+            margin: 40px auto;
+
+        }
+
+
+        .header {
+
+            text-align: center;
+
+            margin-bottom: 30px;
+
+        }
+
+
+        .header h1 {
+
+            font-size: 40px;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .header p {
+
+            color: #6b7280;
+
+            font-size: 17px;
+
+        }
+
+
+        .card {
+
+            background: white;
+
+            padding: 25px;
+
+            border-radius: 12px;
+
+            margin-bottom: 25px;
+
+            box-shadow:
+                0 4px 15px rgba(0, 0, 0, 0.08);
+
+        }
+
+
+        .card h2 {
+
+            margin-bottom: 18px;
+
+        }
+
+
+        textarea {
+
+            width: 100%;
+
+            min-height: 220px;
+
+            padding: 15px;
+
+            border: 1px solid #d1d5db;
+
+            border-radius: 8px;
+
+            font-size: 15px;
+
+            resize: vertical;
+
+        }
+
+
+        textarea:focus,
+        input:focus {
+
+            outline: none;
+
+            border-color: #2563eb;
+
+        }
+
+
+        input[type="text"] {
+
+            width: 100%;
+
+            padding: 14px;
+
+            border: 1px solid #d1d5db;
+
+            border-radius: 8px;
+
+            font-size: 15px;
+
+        }
+
+
+        input[type="file"] {
+
+            width: 100%;
+
+            margin-top: 12px;
+
+            padding: 12px;
+
+            border: 1px solid #d1d5db;
+
+            border-radius: 8px;
+
+            background: #f8fafc;
+
+            cursor: pointer;
+
+        }
+
+
+        .file-help {
+
+            margin-top: 8px;
+
+            font-size: 13px;
+
+            color: #6b7280;
+
+        }
+
+
+        button {
+
+            margin-top: 15px;
+
+            padding: 10px 18px;
+
+            border: none;
+
+            border-radius: 8px;
+
+            background: #2563eb;
+
+            color: white;
+
+            font-size: 14px;
+
+            cursor: pointer;
+
+        }
+
+
+        button:hover {
+
+            background: #1d4ed8;
+
+        }
+
+
+        button:disabled {
+
+            background: #9ca3af;
+
+            cursor: not-allowed;
+
+        }
+
+
+        .feedback-button {
+
+            margin-top: 8px;
+
+            margin-right: 5px;
+
+            padding: 7px 12px;
+
+            font-size: 12px;
+
+        }
+
+
+        .approve {
+
+            background: #16a34a;
+
+        }
+
+
+        .approve:hover {
+
+            background: #15803d;
+
+        }
+
+
+        .edit {
+
+            background: #d97706;
+
+        }
+
+
+        .edit:hover {
+
+            background: #b45309;
+
+        }
+
+
+        .reject {
+
+            background: #dc2626;
+
+        }
+
+
+        .reject:hover {
+
+            background: #b91c1c;
+
+        }
+
+
+        .feedback-status {
+
+            margin-top: 8px;
+
+            font-size: 13px;
+
+            font-weight: bold;
+
+        }
+
+
+        #loading,
+        #askLoading {
+
+            display: none;
+
+            margin-top: 15px;
+
+            color: #2563eb;
+
+            font-weight: bold;
+
+        }
+
+
+        #result {
+
+            display: none;
+
+        }
+
+
+        .section {
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .section:last-child {
+
+            margin-bottom: 0;
+
+        }
+
+
+        .section h3 {
+
+            margin-bottom: 12px;
+
+            font-size: 20px;
+
+        }
+
+
+        .summary-box {
+
+            background: #f8fafc;
+
+            padding: 15px;
+
+            border-radius: 8px;
+
+            line-height: 1.6;
+
+        }
+
+
+        .list {
+
+            list-style: none;
+
+        }
+
+
+        .list li {
+
+            background: #f8fafc;
+
+            padding: 12px 15px;
+
+            margin-bottom: 8px;
+
+            border-radius: 8px;
+
+            line-height: 1.5;
+
+        }
+
+
+        .table-container {
+
+            overflow-x: auto;
+
+        }
+
+
+        table {
+
+            width: 100%;
+
+            border-collapse: collapse;
+
+            min-width: 900px;
+
+        }
+
+
+        th,
+        td {
+
+            text-align: left;
+
+            padding: 13px;
+
+            border-bottom: 1px solid #e5e7eb;
+
+            vertical-align: top;
+
+        }
+
+
+        th {
+
+            background: #f8fafc;
+
+            font-weight: bold;
+
+        }
+
+
+        .priority {
+
+            font-weight: bold;
+
+        }
+
+
+        .high {
+
+            color: #dc2626;
+
+        }
+
+
+        .medium {
+
+            color: #d97706;
+
+        }
+
+
+        .low {
+
+            color: #16a34a;
+
+        }
+
+
+        .source {
+
+            margin-top: 8px;
+
+            font-size: 13px;
+
+            color: #6b7280;
+
+            font-style: italic;
+
+            line-height: 1.4;
+
+        }
+
+
+        .ask-description {
+
+            color: #6b7280;
+
+            margin-bottom: 15px;
+
+        }
+
+
+        #askResult {
+
+            display: none;
+
+            margin-top: 20px;
+
+            background: #f8fafc;
+
+            padding: 18px;
+
+            border-radius: 8px;
+
+        }
+
+
+        #projectAnswer {
+
+            margin-top: 10px;
+
+            line-height: 1.7;
+
+            white-space: pre-wrap;
+
+        }
+
+
+        .memory-info {
+
+            font-size: 18px;
+
+            font-weight: bold;
+
+        }
+
+
+        .memory-description {
+
+            margin-top: 8px;
+
+            color: #6b7280;
+
+            line-height: 1.5;
+
+        }
+
+
+        .footer {
+
+            text-align: center;
+
+            margin-top: 30px;
+
+            color: #9ca3af;
+
+            font-size: 14px;
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+    <!-- ================================= -->
+    <!-- HEADER -->
+    <!-- ================================= -->
+
+    <div class="header">
+
+        <h1>ProjectPulse AI</h1>
+
+        <p>
+            Turn project conversations into actionable intelligence.
+        </p>
+
+    </div>
+
+
+
+    <!-- ================================= -->
+    <!-- CONVERSATION INPUT -->
+    <!-- ================================= -->
+
+    <div class="card">
+
+        <h2>💬 Conversation Input</h2>
+
+
+        <textarea
+            id="conversation"
+            placeholder="Paste your project conversation here..."></textarea>
+
+
+        <!-- FILE UPLOAD -->
+
+        <input
+            type="file"
+            id="conversationFile"
+            accept=".txt">
+
+
+        <div class="file-help">
+
+            📄 Upload a .txt project conversation
+            or paste the conversation manually.
+
+        </div>
+
+
+        <button
+            id="analyzeButton"
+            onclick="analyzeConversation()">
+
+            Analyze Conversation
+
+        </button>
+
+
+        <div id="loading">
+
+            🤖 ProjectPulse AI is analyzing
+            the conversation...
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ================================= -->
+    <!-- AI PROJECT INTELLIGENCE -->
+    <!-- ================================= -->
+
+    <div class="card" id="result">
+
+        <h2>📊 AI Project Intelligence</h2>
+
+
+
+        <!-- SUMMARY -->
+
+        <div class="section">
+
+            <h3>🧠 Summary</h3>
+
+
+            <div
+                id="summary"
+                class="summary-box">
+            </div>
+
+        </div>
+
+
+
+        <!-- DECISIONS -->
+
+        <div class="section">
+
+            <h3>💡 Decisions</h3>
+
+
+            <ul
+                id="decisions"
+                class="list">
+            </ul>
+
+        </div>
+
+
+
+        <!-- ACTION ITEMS -->
+
+        <div class="section">
+
+            <h3>✅ Action Items</h3>
+
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Task</th>
+
+                            <th>Owner</th>
+
+                            <th>Deadline</th>
+
+                            <th>Priority</th>
+
+                            <th>Source</th>
+
+                            <th>Review</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="actionItems">
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- UNRESOLVED ISSUES -->
+
+        <div class="section">
+
+            <h3>⚠️ Unresolved Issues</h3>
+
+
+            <ul
+                id="issues"
+                class="list">
+            </ul>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ================================= -->
+    <!-- PROJECT MEMORY -->
+    <!-- ================================= -->
+
+    <div class="card">
+
+        <h2>🧠 Project Memory</h2>
+
+
+        <p class="ask-description">
+
+            ProjectPulse remembers previous
+            project conversations.
+
+        </p>
+
+
+        <div class="summary-box">
+
+            <div
+                id="memoryCount"
+                class="memory-info">
+
+                Loading project memory...
+
+            </div>
+
+
+            <div class="memory-description">
+
+                Saved conversations can be used
+                when asking questions about the project.
+
+            </div>
+
+        </div>
+
+
+        <button onclick="loadMemory()">
+
+            Refresh Memory
+
+        </button>
+
+    </div>
+
+
+
+    <!-- ================================= -->
+    <!-- ASK THE PROJECT -->
+    <!-- ================================= -->
+
+    <div class="card">
+
+        <h2>🔎 Ask the Project</h2>
+
+
+        <p class="ask-description">
+
+            Ask questions about the project communication.
+
+        </p>
+
+
+        <input
+            type="text"
+            id="projectQuestion"
+            placeholder="Example: What is blocking the bathroom work?">
+
+
+        <button
+            id="askButton"
+            onclick="askProject()">
+
+            Ask Project
+
+        </button>
+
+
+        <div id="askLoading">
+
+            🤖 ProjectPulse AI is thinking...
+
+        </div>
+
+
+        <div id="askResult">
+
+            <h3>🤖 Answer</h3>
+
+
+            <div id="projectAnswer">
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ================================= -->
+    <!-- FOOTER -->
+    <!-- ================================= -->
+
+    <div class="footer">
+
+        ProjectPulse AI • Intelligent Project Communication
+
+    </div>
+
+
+</div>
+
+
+
+<script>
+
+
+    // =====================================
+    // TEXT FILE UPLOAD
+    // =====================================
+
+    document
+        .getElementById("conversationFile")
+        .addEventListener(
+            "change",
+            handleFileUpload
+        );
+
+
+    async function handleFileUpload(event) {
+
+
+        const file =
+            event.target.files[0];
+
+
+        if (!file) {
+
+            return;
+
+        }
+
+
+        // Make sure it is a text file
+
+        if (
+            file.type !== "text/plain" &&
+            !file.name.toLowerCase().endsWith(".txt")
+        ) {
+
+            alert(
+                "Please upload a .txt file."
+            );
+
+            event.target.value = "";
+
+            return;
+
+        }
+
+
+        try {
+
+
+            const text =
+                await file.text();
+
+
+            document.getElementById(
+                "conversation"
+            ).value = text;
+
+
+        }
+
+        catch (error) {
+
+
+            console.error(error);
+
+
+            alert(
+                "Could not read the selected file."
+            );
+
+        }
+
+    }
+
+
+
+    // =====================================
+    // ANALYZE CONVERSATION
+    // =====================================
+
+    async function analyzeConversation() {
+
+
+        const conversation =
+            document.getElementById(
+                "conversation"
+            ).value;
+
+
+        const button =
+            document.getElementById(
+                "analyzeButton"
+            );
+
+
+        const loading =
+            document.getElementById(
+                "loading"
+            );
+
+
+        const result =
+            document.getElementById(
+                "result"
+            );
+
+
+        if (!conversation.trim()) {
+
+            alert(
+                "Please enter a conversation first."
+            );
+
+            return;
+
+        }
+
+
+        button.disabled = true;
+
+        loading.style.display = "block";
+
+        result.style.display = "none";
+
+
+        try {
+
+
+            const response =
+                await fetch(
+                    "/analyze",
+                    {
+
+                        method: "POST",
+
+                        headers: {
+
+                            "Content-Type":
+                                "application/json"
+
+                        },
+
+                        body: JSON.stringify({
+
+                            conversation:
+                                conversation
+
+                        })
+
+                    }
+                );
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "Server returned an error."
+                );
+
+            }
+
+
+            const data =
+                await response.json();
+
+
+            const analysis =
+                JSON.parse(
+                    data.analysis
+                );
+
+
+            // ---------------------------------
+            // SUMMARY
+            // ---------------------------------
+
+            document.getElementById(
+                "summary"
+            ).textContent =
+                analysis.summary;
+
+
+
+            // ---------------------------------
+            // DECISIONS
+            // ---------------------------------
+
+            const decisions =
+                document.getElementById(
+                    "decisions"
+                );
+
+
+            decisions.innerHTML = "";
+
+
+            analysis.decisions.forEach(
+                function(decision) {
+
+
+                    const li =
+                        document.createElement(
+                            "li"
+                        );
+
+
+                    li.innerHTML = `
+
+                        <strong>
+
+                            • ${escapeHtml(
+                                decision.decision
+                            )}
+
+                        </strong>
+
+
+                        <div class="source">
+
+                            📌 Source:
+
+                            ${escapeHtml(
+                                decision.source
+                            )}
+
+                        </div>
+
+                    `;
+
+
+                    decisions.appendChild(li);
+
+                }
+            );
+
+
+
+            // ---------------------------------
+            // ACTION ITEMS
+            // ---------------------------------
+
+            const actionItems =
+                document.getElementById(
+                    "actionItems"
+                );
+
+
+            actionItems.innerHTML = "";
+
+
+            analysis.action_items.forEach(
+                function(item, index) {
+
+
+                    const row =
+                        document.createElement(
+                            "tr"
+                        );
+
+
+                    const priority =
+                        item.priority.toLowerCase();
+
+
+                    let feedbackStatus =
+                        item.feedback_status || "";
+
+
+                    let statusText = "";
+
+
+                    if (feedbackStatus) {
+
+                        statusText =
+                            "✓ " +
+                            feedbackStatus;
+
+                    }
+
+
+                    row.innerHTML = `
+
+                        <td>
+
+                            <div id="task-${index}">
+
+                                ${escapeHtml(
+                                    item.task
+                                )}
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+
+                            ${escapeHtml(
+                                item.owner
+                            )}
+
+                        </td>
+
+
+                        <td>
+
+                            ${escapeHtml(
+                                item.deadline
+                            )}
+
+                        </td>
+
+
+                        <td class="priority ${priority}">
+
+                            ${escapeHtml(
+                                item.priority
+                            )}
+
+                        </td>
+
+
+                        <td>
+
+                            <div class="source">
+
+                                📌
+                                ${escapeHtml(
+                                    item.source
+                                )}
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                class="feedback-button approve"
+                                onclick="approveTask(
+                                    ${index},
+                                    '${escapeJs(item.task)}'
+                                )">
+
+                                ✓ Approve
+
+                            </button>
+
+
+                            <button
+                                class="feedback-button edit"
+                                onclick="editTask(
+                                    ${index},
+                                    '${escapeJs(item.task)}'
+                                )">
+
+                                ✏ Edit
+
+                            </button>
+
+
+                            <button
+                                class="feedback-button reject"
+                                onclick="rejectTask(
+                                    ${index},
+                                    '${escapeJs(item.task)}'
+                                )">
+
+                                ✕ Reject
+
+                            </button>
+
+
+                            <div
+                                id="status-${index}"
+                                class="feedback-status">
+
+                                ${escapeHtml(
+                                    statusText
+                                )}
+
+                            </div>
+
+                        </td>
+
+                    `;
+
+
+                    actionItems.appendChild(row);
+
+                }
+            );
+
+
+
+            // ---------------------------------
+            // UNRESOLVED ISSUES
+            // ---------------------------------
+
+            const issues =
+                document.getElementById(
+                    "issues"
+                );
+
+
+            issues.innerHTML = "";
+
+
+            analysis.unresolved_issues.forEach(
+                function(issue) {
+
+
+                    const li =
+                        document.createElement(
+                            "li"
+                        );
+
+
+                    li.innerHTML = `
+
+                        <strong>
+
+                            • ${escapeHtml(
+                                issue.issue
+                            )}
+
+                        </strong>
+
+
+                        <div class="source">
+
+                            📌 Source:
+
+                            ${escapeHtml(
+                                issue.source
+                            )}
+
+                        </div>
+
+                    `;
+
+
+                    issues.appendChild(li);
+
+                }
+            );
+
+
+            result.style.display = "block";
+
+
+            loadMemory();
+
+        }
+
+
+        catch (error) {
+
+
+            console.error(error);
+
+
+            alert(
+                "Something went wrong while analyzing the conversation."
+            );
+
+        }
+
+
+        finally {
+
+
+            button.disabled = false;
+
+            loading.style.display = "none";
+
+        }
+
+    }
+
+
+
+    // =====================================
+    // APPROVE TASK
+    // =====================================
+
+    async function approveTask(
+        index,
+        task
+    ) {
+
+
+        await sendFeedback(
+            index,
+            task,
+            "Approved",
+            ""
+        );
+
+    }
+
+
+
+    // =====================================
+    // EDIT TASK
+    // =====================================
+
+    async function editTask(
+        index,
+        task
+    ) {
+
+
+        const editedTask =
+            prompt(
+                "Edit the action item:",
+                task
+            );
+
+
+        if (
+            editedTask === null ||
+            !editedTask.trim()
+        ) {
+
+            return;
+
+        }
+
+
+        await sendFeedback(
+            index,
+            task,
+            "Edited",
+            editedTask.trim()
+        );
+
+
+        const taskElement =
+            document.getElementById(
+                `task-${index}`
+            );
+
+
+        taskElement.textContent =
+            editedTask.trim();
+
+    }
+
+
+
+    // =====================================
+    // REJECT TASK
+    // =====================================
+
+    async function rejectTask(
+        index,
+        task
+    ) {
+
+
+        await sendFeedback(
+            index,
+            task,
+            "Rejected",
+            ""
+        );
+
+
+        const statusElement =
+            document.getElementById(
+                `status-${index}`
+            );
+
+
+        statusElement.textContent =
+            "✓ Rejected";
+
+
+        const row =
+            statusElement.closest("tr");
+
+
+        setTimeout(
+            function() {
+
+                row.style.display = "none";
+
+            },
+            500
+        );
+
+    }
+
+
+
+    // =====================================
+    // SEND FEEDBACK
+    // =====================================
+
+    async function sendFeedback(
+        index,
+        task,
+        status,
+        editedTask
+    ) {
+
+
+        const statusElement =
+            document.getElementById(
+                `status-${index}`
+            );
+
+
+        try {
+
+
+            const response =
+                await fetch(
+                    "/feedback",
+                    {
+
+                        method: "POST",
+
+                        headers: {
+
+                            "Content-Type":
+                                "application/json"
+
+                        },
+
+                        body: JSON.stringify({
+
+                            task: task,
+
+                            status: status,
+
+                            edited_task:
+                                editedTask
+
+                        })
+
+                    }
+                );
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "Feedback request failed."
+                );
+
+            }
+
+
+            const data =
+                await response.json();
+
+
+            if (data.success) {
+
+                statusElement.textContent =
+                    "✓ " + status;
+
+            }
+
+
+        }
+
+        catch (error) {
+
+
+            console.error(error);
+
+
+            statusElement.textContent =
+                "Could not save feedback.";
+
+        }
+
+    }
+
+
+
+    // =====================================
+    // PROJECT MEMORY
+    // =====================================
+
+    async function loadMemory() {
+
+
+        const memoryCount =
+            document.getElementById(
+                "memoryCount"
+            );
+
+
+        try {
+
+
+            const response =
+                await fetch(
+                    "/memory"
+                );
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "Could not load memory."
+                );
+
+            }
+
+
+            const data =
+                await response.json();
+
+
+            memoryCount.textContent =
+
+                "🧠 " +
+
+                data.saved_conversations +
+
+                " conversation(s) saved in project memory.";
+
+        }
+
+
+        catch (error) {
+
+
+            console.error(error);
+
+
+            memoryCount.textContent =
+                "Unable to load project memory.";
+
+        }
+
+    }
+
+
+
+    // =====================================
+    // ASK THE PROJECT
+    // =====================================
+
+    async function askProject() {
+
+
+        const conversation =
+            document.getElementById(
+                "conversation"
+            ).value;
+
+
+        const question =
+            document.getElementById(
+                "projectQuestion"
+            ).value;
+
+
+        const button =
+            document.getElementById(
+                "askButton"
+            );
+
+
+        const loading =
+            document.getElementById(
+                "askLoading"
+            );
+
+
+        const result =
+            document.getElementById(
+                "askResult"
+            );
+
+
+        const answer =
+            document.getElementById(
+                "projectAnswer"
+            );
+
+
+        if (!conversation.trim()) {
+
+            alert(
+                "Please enter a project conversation first."
+            );
+
+            return;
+
+        }
+
+
+        if (!question.trim()) {
+
+            alert(
+                "Please enter a question."
+            );
+
+            return;
+
+        }
+
+
+        button.disabled = true;
+
+        loading.style.display = "block";
+
+        result.style.display = "none";
+
+
+        try {
+
+
+            const response =
+                await fetch(
+                    "/ask",
+                    {
+
+                        method: "POST",
+
+                        headers: {
+
+                            "Content-Type":
+                                "application/json"
+
+                        },
+
+                        body: JSON.stringify({
+
+                            conversation:
+                                conversation,
+
+                            question:
+                                question
+
+                        })
+
+                    }
+                );
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "Server returned an error."
+                );
+
+            }
+
+
+            const data =
+                await response.json();
+
+
+            answer.textContent =
+                data.answer;
+
+
+            result.style.display =
+                "block";
+
+        }
+
+
+        catch (error) {
+
+
+            console.error(error);
+
+
+            alert(
+                "Something went wrong while asking ProjectPulse AI."
+            );
+
+        }
+
+
+        finally {
+
+
+            button.disabled = false;
+
+            loading.style.display = "none";
+
+        }
+
+    }
+
+
+
+    // =====================================
+    // SECURITY HELPERS
+    // =====================================
+
+    function escapeHtml(text) {
+
+
+        const div =
+            document.createElement(
+                "div"
+            );
+
+
+        div.textContent =
+            text ?? "";
+
+
+        return div.innerHTML;
+
+    }
+
+
+    function escapeJs(text) {
+
+
+        return String(text ?? "")
+
+            .replace(
+                /\\/g,
+                "\\\\"
+            )
+
+            .replace(
+                /'/g,
+                "\\'"
+            )
+
+            .replace(
+                /\r/g,
+                "\\r"
+            )
+
+            .replace(
+                /\n/g,
+                "\\n"
+            );
+
+    }
+
+
+
+    // =====================================
+    // LOAD MEMORY ON PAGE OPEN
+    // =====================================
+
+    loadMemory();
+
+
+</script>
+
+
+</body>
+
+</html>

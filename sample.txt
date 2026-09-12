@@ -1,0 +1,9 @@
+Client: The kitchen cabinets are approved with walnut finish.
+
+Contractor: I need the final cabinet measurements before installation.
+
+Project Manager: Vinay, please send the measurements to the contractor by September 15.
+
+Client: Also, the marble shade 312 is unavailable. Please suggest an alternative.
+
+Contractor: Installation can start once the measurements are received.
